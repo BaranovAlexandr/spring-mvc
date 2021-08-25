@@ -1,11 +1,13 @@
 package web.DAO;
 
+import org.springframework.stereotype.Component;
 import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAO {
+@Component
+public class DAO implements DAOi {
     private List<Car> carList;
 
     {
@@ -17,9 +19,13 @@ public class DAO {
         carList.add(new Car("VAZ", "2106", 1980));
     }
 
+    @Override
     public List<Car> getCarList(int count) {
         if (count > 5) {
             count = 5;
+        }
+        if (count == 0) {
+            return carList;
         }
         return new ArrayList<>(carList.subList(0, count));
     }

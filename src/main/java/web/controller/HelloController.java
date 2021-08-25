@@ -1,5 +1,6 @@
 package web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,12 @@ import java.util.List;
 @Controller
 public class HelloController {
 
-	private final UserService service = new UserService();
+	@Autowired
+	private final UserService service;
+
+	public HelloController(UserService service) {
+		this.service = service;
+	}
 
 
 	@GetMapping(value = "/")
@@ -27,7 +33,7 @@ public class HelloController {
 
 	@GetMapping(value = "/car")
 	public String car(
-			@RequestParam(value = "count") int count,
+			@RequestParam(value = "count",defaultValue = "0", required = false) int count,
 			ModelMap model){
 		model.addAttribute("cars", service.getCars(count));
 		return "car";
