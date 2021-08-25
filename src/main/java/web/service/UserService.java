@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class UserService {
 
-    @Autowired
     private final DAOi dao;
 
+    @Autowired
     public UserService(DAOi dao) {
         this.dao = dao;
     }

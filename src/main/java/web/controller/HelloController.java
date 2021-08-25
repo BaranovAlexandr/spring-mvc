@@ -13,7 +13,6 @@ import java.util.List;
 @Controller
 public class HelloController {
 
-	@Autowired
 	private final UserService service;
 
 	public HelloController(UserService service) {
@@ -32,9 +31,8 @@ public class HelloController {
 	}
 
 	@GetMapping(value = "/car")
-	public String car(
-			@RequestParam(value = "count",defaultValue = "0", required = false) int count,
-			ModelMap model){
+	public String car(@RequestParam(value = "count",defaultValue = "0", required = false) int count,
+					  ModelMap model){
 		model.addAttribute("cars", service.getCars(count));
 		return "car";
 	}
